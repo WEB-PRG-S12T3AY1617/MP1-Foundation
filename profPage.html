@@ -1,0 +1,121 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="navBarcss.css">
+		<link rel="stylesheet" type="text/css" href="profPagecss.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		
+	</head>
+	<body>
+		<div align="center" class="navbar">
+			<a class="post" align="center" href="" >
+				Recent Post
+			</a>
+			
+			<a class="post" align="center" href="" >
+				Recent Photots
+			</a>
+			
+			<a id="user" class="post" align="center" href="" >
+				Users 
+			</a>
+		</div>
+		<div style="width:100%;height:60px;"></div>
+		
+		<div class="main">
+			<div class="loadDiv">
+				<div class="userInfoDiv">
+					<div class="profPicDiv">
+						<img src="DP2.jpg" height="200px"></img>
+					</div>
+					
+					<div class="profInfoDiv">
+						<table style="font-size:12px;">
+						  <tr>
+							<td>ID:</td>
+							<td>11341572</td>
+						  </tr>
+						  <tr>
+							<td>NAME:</td>
+							<td>Benitoper Huang</td>
+						  </tr>
+						  <tr>
+							<td>USERNAME:</td>
+							<td>Beni</td>
+						  </tr>
+						  <tr>
+							<td>E-MAIL:</td>
+							<td>benitoper_huang@dlsu.edu.ph</td>
+						  </tr>
+						  <tr>
+							<th>ADDRESS:</th>
+							<th> </th>
+						  </tr>
+						  <tr>
+							<td>STREET:</td>
+							<td>Panalturan</td>
+						  </tr>
+						  <tr>
+							<td>SUITE:</td>
+							<td>Psfsfuran</td>
+						  </tr>
+						  <tr>
+							<td>CITY:</td>
+							<td>Quezon CIty</td>
+						  </tr>
+						  <tr>
+							<td>ZIPCODE:</td>
+							<td>1100</td>
+						  </tr>
+						  <tr>
+							<td>PHONE:</td>
+							<td>3635719</td>
+						  </tr>
+						  <tr>
+							<td>WEBSITE:</td>
+							<td>hello_world.com</td>
+						  </tr>
+						  <tr>
+							<th>COMPANY:</th>
+							<th> </th>
+						  </tr>
+						  <tr>
+							<td>NAME:</td>
+							<td>hello_world co</td>
+						  </tr>
+						  <tr>
+							<td>CATCH PHRASE:</td>
+							<td>hello world</td>
+						  </tr>
+						  <tr>
+							<td>BS:</td>
+							<td>hello_world</td>
+						  </tr>
+						</table>
+					</div>
+				</div>
+				
+				<div class="mppDiv">
+					<div class="mapDiv" id="map">
+					</div>
+					
+					<div class="photoDiv">
+					</div>
+					
+					<div class="postDiv">
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRwsZalvcPSU_c_iUZLqIGCzNht9bfPn0&callback=myMap" async defer></script>
+	<script>
+	function myMap() {
+			var mapOptions = {
+				center: new google.maps.LatLng(51.5, -0.12),
+				zoom: 10,
+				mapTypeId: google.maps.MapTypeId.HYBRID
+			}
+		var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+		}
+	</script>
+</html>
