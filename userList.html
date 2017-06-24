@@ -6,6 +6,7 @@
 		
 		<script>
 			var dataSet;
+			var i = 1;
 			var root = 'https://jsonplaceholder.typicode.com';
 			var a={
 					url: root + '/users',
@@ -14,13 +15,37 @@
 			$.ajax(a).then(function(data) {
 			  dataSet=data;
 			  var list="";
+			  //var j=1;
+			  var listScript;
 				for(i=0;i<data.length;i++)
 				{
-					list = list + '<li><div class="listItem"><div class="profPicPage"><img src="DP.jpg" height="60"></div><div><a class="attributes">NAME:'+ data[i].name +'</a></br><a class="attributes">ID:'+ data[i].id +'</a></br></div></div></br></li>'
+					list = list + '<li value='+i+'><div class="listItem"><div class="profPicPage"><img src="DP.jpg" height="60"></div><div><a class="attributes">NAME:'+ data[i].name +'</a></br><a class="attributes">ID:'+ data[i].id +'</a></br></div></div></br></li>'
 				}
 				$('.listPage').html(list);
+				
+				$(document).ready(function(){
+					$("ul li div").click(function(){
+						console.log($(this).parent().index());
+						selectUser($(this).parent().index()+1);
+					});
+				});
+				function selectUser(n){
+					$(document).ready(function(){
+						console.log(n);
+						window.location.href='profPage.html?index='+$(".listPage li:nth-child("+n+")").val();
+					});
+				};
 			});
 		</script>
+		<!--<script>
+			$(document).ready(function(){
+				var i = 1;
+				$(".listPage li:nth-child("+1+")").click(function selectUser(i){
+					console.log(i);
+					window.location.href='profPage.html?index='+$(".listPage li:nth-child("+i+")").val();
+				});
+			});
+		</script>-->
 	</head>
 	<body>
 		<div align="center" class="navbar">							<!--Navigation Bar start-->
@@ -29,7 +54,7 @@
 			</a>
 			
 			<a class="post" align="center" href="" >
-				Recent Photots
+				Recent Photos
 			</a>
 			
 			<a id="user" class="post" align="center" href="" >
