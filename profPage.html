@@ -3,7 +3,63 @@
 		<link rel="stylesheet" type="text/css" href="navBarcss.css">
 		<link rel="stylesheet" type="text/css" href="profPagecss.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRwsZalvcPSU_c_iUZLqIGCzNht9bfPn0&callback=myMap" async defer></script>
 		
+		<script>
+		var index;
+		var getUrlParameter = function getUrlParameter(sParam) {
+			var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+				sURLVariables = sPageURL.split('&'),sParameterName,i;
+
+			for (i = 0; i < sURLVariables.length; i++) {
+				sParameterName = sURLVariables[i].split('=');
+
+				if (sParameterName[0] === sParam) {
+					return sParameterName[1] === undefined ? true : sParameterName[1];
+				}
+			}
+		};//code by Sammer Kazi. stackoverflow.com
+		function myMap(i) {
+				var mapOptions = {
+					center: new google.maps.LatLng(parseInt(i.address.geo.lat), parseInt(i.address.geo.lng)),
+					zoom: 10,
+					mapTypeId: google.maps.MapTypeId.HYBRID
+				}
+				var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+				var marker = new google.maps.Marker({
+					position: new google.maps.LatLng(parseInt(i.address.geo.lat), parseInt(i.address.geo.lng)),
+					map: map,
+				})
+			}
+		$(document).ready(function(){
+			index = getUrlParameter('index');
+			index = parseInt(index)+1;
+			console.log(index);
+			var root = 'https://jsonplaceholder.typicode.com';
+
+			$.ajax({
+				url: root + '/users/'+index,
+				method: 'GET'
+			}).then(function(data) {
+			  console.log(data);
+			  $('#userId').html(data.id);
+			  $('#userName').html(data.name);
+			  $('#userUsername').html(data.username);
+			  $('#userEmail').html(data.email);
+			  $('#userStreet').html(data.address.street);
+			  $('#userSuite').html(data.address.suite);
+			  $('#userCity').html(data.address.city);
+			  $('#userZipcode').html(data.address.zipcode);
+			  $('#userPhone').html(data.phone);
+			  $('#userWebsite').html(data.website);
+			  $('#userCompayName').html(data.company.name);
+			  $('#userCatchPhrase').html(data.company.catchPhrase);
+			  $('#userCompanyBS').html(data.company.bs);
+			  myMap(data);
+			  
+			});
+		});	
+		</script>
 	</head>
 	<body>
 		<div align="center" class="navbar">
@@ -12,7 +68,7 @@
 			</a>
 			
 			<a class="post" align="center" href="" >
-				Recent Photots
+				Recent Photos
 			</a>
 			
 			<a id="user" class="post" align="center" href="" >
@@ -29,22 +85,22 @@
 					</div>
 					
 					<div class="profInfoDiv">
-						<table style="font-size:12px;">
+						<table class="infoTable">
 						  <tr>
 							<td>ID:</td>
-							<td>11341572</td>
+							<td id="userId"></td>
 						  </tr>
 						  <tr>
 							<td>NAME:</td>
-							<td>Benitoper Huang</td>
+							<td id="userName"></td>
 						  </tr>
 						  <tr>
 							<td>USERNAME:</td>
-							<td>Beni</td>
+							<td id="userUsername"></td>
 						  </tr>
 						  <tr>
 							<td>E-MAIL:</td>
-							<td>benitoper_huang@dlsu.edu.ph</td>
+							<td id="userEmail"></td>
 						  </tr>
 						  <tr>
 							<th>ADDRESS:</th>
@@ -52,27 +108,27 @@
 						  </tr>
 						  <tr>
 							<td>STREET:</td>
-							<td>Panalturan</td>
+							<td id="userStreet"></td>
 						  </tr>
 						  <tr>
 							<td>SUITE:</td>
-							<td>Psfsfuran</td>
+							<td id="userSuite"></td>
 						  </tr>
 						  <tr>
 							<td>CITY:</td>
-							<td>Quezon CIty</td>
+							<td id="userCity"></td>
 						  </tr>
 						  <tr>
 							<td>ZIPCODE:</td>
-							<td>1100</td>
+							<td id="userZipcode"></td>
 						  </tr>
 						  <tr>
 							<td>PHONE:</td>
-							<td>3635719</td>
+							<td id="userPhone"></td>
 						  </tr>
 						  <tr>
 							<td>WEBSITE:</td>
-							<td>hello_world.com</td>
+							<td id="userWebsite"></td>
 						  </tr>
 						  <tr>
 							<th>COMPANY:</th>
@@ -80,42 +136,49 @@
 						  </tr>
 						  <tr>
 							<td>NAME:</td>
-							<td>hello_world co</td>
+							<td id="userCompayName"></td>
 						  </tr>
 						  <tr>
 							<td>CATCH PHRASE:</td>
-							<td>hello world</td>
+							<td id="userCatchPhrase"></td>
 						  </tr>
 						  <tr>
 							<td>BS:</td>
-							<td>hello_world</td>
+							<td id="userCompanyBS"></td>
 						  </tr>
 						</table>
 					</div>
 				</div>
-				
+				<div style="height:600px;width:28%;margin-right:2%;margin-top:2%;"></div>
 				<div class="mppDiv">
 					<div class="mapDiv" id="map">
 					</div>
 					
 					<div class="photoDiv">
+						<div class="signDiv">
+							<a href="" class="signHREF">User's Photos</a>
+						</div>
+						<div class="photoTNDiv">
+							<img style="margin:10px;"src="DP2.jpg" height="150px"></img>
+							<img style="margin:10px;"src="DP2.jpg" height="150px"></img>
+							<img style="margin:10px;"src="DP2.jpg" height="150px"></img>
+							<img style="margin:10px;"src="DP2.jpg" height="150px"></img>
+						</div>
 					</div>
 					
 					<div class="postDiv">
+						<div class="signDiv">
+							<a href="" class="signHREF">User's Posts</a>
+						</div>
+						<div class="postContentDiv">
+						
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</body>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRwsZalvcPSU_c_iUZLqIGCzNht9bfPn0&callback=myMap" async defer></script>
 	<script>
-	function myMap() {
-			var mapOptions = {
-				center: new google.maps.LatLng(51.5, -0.12),
-				zoom: 10,
-				mapTypeId: google.maps.MapTypeId.HYBRID
-			}
-		var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-		}
+	
 	</script>
 </html>

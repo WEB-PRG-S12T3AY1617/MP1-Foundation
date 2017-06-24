@@ -1,5 +1,4 @@
 .loadDiv{
-	height:100%;
 	width:1000px;
 	background-color:#D1E3D1;
 	display:flex;
@@ -9,16 +8,24 @@
 .userInfoDiv{
 	background-color:#9DD8B0;
 	height:600px;
-	width:28%;
+	width:280px;
 	margin-right:2%;
-	margin-top:2%;
+	margin-top:1%;
+	position:fixed;
+}
+
+.infoTable{
+	font-size:14px;
+	width:95%;
+	margin-left:5%;
+	margin-right:5%;
 }
 
 .profPicDiv{
 	background:	#9DD8B0;
 	height:40%;
 	width:100%;
-	margin-top:20px;
+	margin-top:5px;
 	display:flex;
 	flex-direction:row;
 	align-items: center;
@@ -30,24 +37,74 @@
 	font-size:6px;
 	font-family:Arial;
 	width:100%;
-	margin-top:20px;
 	display:flex;
 	flex-direction:row;
 	align-items: center;
-	justify-content: center;
+	justify-content: left;
 }
 
 .mppDiv{
-	background-color:#9DD8B0;
-	margin-top:2%;
-	height:100%;
+	background-color:#D1E3D1;
+	margin-top:1.5%;
 	width:72%;
 	display:flex;
-	flex-fdirection:column;
+	flex-direction:column;
 }
 
 .mapDiv{
 	background:white;
-	height:30%;
+	height:230px;
+	width:100%;
+}
+
+.photoDiv{
+	background:white;
+	height:240px;
+	width:100%;
+	margin-top:12px;
+}
+
+.signDiv{
+	background:#9DD8B0;
+	height:40px;
+	width:98.1%;
+	font-family:Arial;
+	display:flex;
+	flex-direction:row;
+	align-items: center;
+	justify-content: left;
+	padding-left:2%;
+}
+
+.signHREF{
+	color:black;
+	text-decoration:none;
+}
+
+.signHREF:hover{
+	color:black;
+	text-decoration:underline;
+}
+
+.photoTNDiv{
+	height:85%;
+	width:98.1%;
+	font-family:Arial;
+	display:flex;
+	flex-direction:row;
+	align-items: center;
+	justify-content: left;
+	padding-left:2%;
+}
+
+.postDiv{
+	height:1000px;
+	width:100%;
+	margin-top:12px;
+}
+
+.postContentDiv{
+	background-color:white;
+	height:1000px;
 	width:100%;
 }
