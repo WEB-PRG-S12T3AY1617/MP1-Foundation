@@ -1,0 +1,34 @@
+.listPage{
+	list-style-type:none;
+	text-align:left;
+	padding:0;
+	padding-right:7;
+}
+
+.attributes{
+	font-family:Arial;
+}
+
+#photomain{
+    background-color:#D1E3D1;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+}
+
+.attributes{
+    font-family:Arial;
+}
+#loadDiv{
+    background-color:#D1E3D1;
+    width:870px;
+    display: flex;
+}
+.infoTable{
+    font-size:14px;
+    width:95%;
+    margin-left:5%;
+    margin-right:5%;
+}
+

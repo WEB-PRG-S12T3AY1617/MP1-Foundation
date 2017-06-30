@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="navBarcss.css">
+		<link rel="stylesheet" type="text/css" href="photoListcss.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+                var photoSet;
+                var photoIndex;
+                var root = 'https://jsonplaceholder.typicode.com';
+                var a=
+                {
+                    url: root + '/photos',
+                    method: 'GET'
+                };
+
+                $.ajax(a).then(function(photo)
+                {
+                    photoSet = photo;
+                    var photolist="";
+                    var start = 0;
+                    var end = start + 10;
+                    
+                    for(i=start;i<end;i++)
+                    {
+                        photolist = photolist + '<li><div><a href="photoInfo.html?index='+i+'"><img src="' + photo[i].thumbnailUrl + '" id="thumbnails"></a></div></li>'
+                    }
+                    $(".listPage").html(photolist);
+                    
+                    start = end;
+                    end = start + 10;
+                    $("#see_more").click(function(){
+                        for(i=start;i<end;i++)
+                        {
+                            photolist = photolist + '<li><div><a href="photoInfo.html?index='+i+'"><img src="' + photo[i].thumbnailUrl + '" id="thumbnails"></a></div></li>' 
+                            console.log(end);
+                        }
+                        start = end;
+                        end = start + 10;
+                        $(".listPage").html(photolist);
+                    });
+                });
+        </script>
+	</head>
+	<body>
+		<div align="center" class="navbar">							<!--Navigation Bar start-->
+			<a class="post" align="center" href="recentPosts.html" >
+				All Post
+			</a>
+			
+			<a class="post" align="center" href="photoList.html">
+				All Photots
+			</a>
+			
+			<a id="user" class="post" align="center" href="userList.html" >
+				All Users 
+			</a>
+            <a id="album" class="post" align="center" href="AlbumAllList.html" >
+				All Albums
+			</a>
+		</div>													
+		<div style="width:100%;height:60px;"></div>					<!--Navigation Bar end-->
+		
+		<div class="main">											<!--Your code start-->
+            <div id="loadDiv">
+				<ul class="listPage">
+					
+				</ul>
+                <div id="see_more">
+                See more...
+                </div>
+            </div>
+        </div>														<!--Your code end-->
+	</body>
+</html>

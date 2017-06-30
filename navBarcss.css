@@ -1,0 +1,76 @@
+/*html{
+    background-image:url("BG.jpg");
+    background-size: cover;
+    min-height: 100%;
+    background-repeat: round;
+    background-attachment: fixed;
+    background-position: center;
+}*/
+
+body{
+	margin:0;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+    background-color:#D1E3D1;
+}
+.navbar{
+	background-color:#006633;
+	width:100%;
+	height:60px;
+	position:fixed;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.post{
+	padding:20px;
+	font-family: Arial;
+	color:white;
+	text-decoration: none;
+}
+
+.post:hover{
+	background-color:#00994d;
+	padding:20px;
+	font-family: Arial;
+	color:white;
+}
+
+.post:active{
+	background-color:#006633;
+	padding:20px;
+	font-family: Arial;
+	color:white;
+}
+
+.main{
+	background-color:#D1E3D1;
+	width:100%;
+	display:flex;
+	flex-direction:row;
+	justify-content: center;
+}
+
+#photomain
+{
+    margin-top: 30px;
+    align-self: center;
+}
+
+#thumbnails2
+{
+    border-radius: 10px;
+    border-color: darkturquoise;
+}
+
+.photoInfoTable
+{
+    font-family: Arial;
+    font-size: 20px;
+}

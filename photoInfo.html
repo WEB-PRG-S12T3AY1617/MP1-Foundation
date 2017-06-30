@@ -1,0 +1,103 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="navBarcss.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            var idx;
+            var getUrlParameter = function getUrlParameter(sParam) 
+            {
+                var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+				sURLVariables = sPageURL.split('&'),sParameterName,i;
+
+                for (i = 0; i < sURLVariables.length; i++) 
+                {
+				    sParameterName = sURLVariables[i].split('=');
+				    if (sParameterName[0] === sParam) 
+                    {
+					   return sParameterName[1] === undefined ? true : sParameterName[1];
+				    }
+                }
+			};//code by Sammer Kazi. stackoverflow.com
+            
+            $(document).ready(function()
+            {
+			     idx = getUrlParameter('index');
+            });
+            
+            var root = 'https://jsonplaceholder.typicode.com';
+            var a=
+            {
+                    url: root + '/photos',
+                    method: 'GET'
+            };
+            
+            
+            var b=
+            {
+                url: root + '/albums',
+                method: 'GET'
+            };
+            
+            var c=
+            {
+                url: root + '/users',
+                method: 'GET'
+            }
+            $.ajax(a).then(function(photo)
+            {
+                var singlelist="";
+                var albumTitle;
+                var albumNo;
+                var userName;
+                var userId;
+                $.ajax(b).then(function(albumTitleHere)
+                {
+                    $.ajax(c).then(function(ownerHere)
+                    {
+                       for(i=0;i<albumTitleHere.length;i++)
+                       {
+                           if(photo[idx].albumId == albumTitleHere[i].id)
+                           {
+                               albumNo = i;
+                               albumTitle = albumTitleHere[i].title;
+                           }
+                       }
+                          for(i=0;i<ownerHere.length;i++)
+                          {
+                               if(albumTitleHere[albumNo].userId == ownerHere[i].id)
+                               {
+                                   userName = ownerHere[i].name;
+                                   userId = ownerHere[i].id - 1;
+                               }
+                               singlelist = '<div class="photoItem"><img src="' + photo[idx].url + '" id="thumbnails2"></div><div class="attribute"><table class="photoInfoTable"><tr><td>Photo Title: </td><td>' + photo[idx].title +'</td></tr><tr><td>Album Title: </td><td><a href="albumList.html?AlbumId='+photo[idx].albumId+'" style="color: black; text-decoration: none;">' +albumTitle+'</td></tr><tr><td>User:</td><td><a href="profPage.html?index='+userId+'" style="color: black; text-decoration: none;">'+userName+'</td></tr></table></div>'
+                              $("#loadDiv").html(singlelist);
+                         }
+                       });
+                });
+            });
+        </script>
+	</head>
+	<body>
+		<div align="center" class="navbar">							<!--Navigation Bar start-->
+			<a class="post" align="center" href="recentPosts.html" >
+				All Post
+			</a>
+			
+			<a class="post" align="center" href="photoList.html">
+				All Photots
+			</a>
+			
+			<a id="user" class="post" align="center" href="userList.html" >
+				All Users 
+			</a>
+            <a id="album" class="post" align="center" href="AlbumAllList.html" >
+				All Albums
+			</a>
+		</div>													
+		<div style="width:100%;height:60px;"></div>					<!--Navigation Bar end-->
+		<div id="photomain">                                      
+            <div id="loadDiv">                          
+            </div>
+        </div>														<!--Your code end-->
+	</body>
+</html>

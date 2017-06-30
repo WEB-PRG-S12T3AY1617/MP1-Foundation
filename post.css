@@ -1,0 +1,127 @@
+.loadDiv{
+	background-color:#D1E3D1;
+	width:600px;
+}
+.postDiv{
+	width:100%;
+	background-color:#9DD8B0;
+	border-radius: 8px;
+	border-left:10px solid #006633;
+	border-top: 2px solid #006633;
+	border-right: 2px solid #006633;
+	border-bottom: 2px solid #006633;
+    display:flex;
+    flex-direction: row;
+	margin-bottom:10px;
+}
+
+.posts{
+	list-style-type:none;
+	text-align:inherit;
+	padding:0;
+	padding-right:7;
+}
+.userDetails
+{
+	font-family:Arial;
+	width:20%;
+	height:150px;
+    padding: 10px;
+    display:flex;
+    flex-direction:column;
+	align-items: center;
+	justify-content:center;
+}
+.postDetDiv{
+	width:80%;
+	display:flex;
+    flex-direction:column;
+	justify-content:flex-start;
+	align-items:left;
+}
+.postTitDiv{
+	font-family:Arial;
+	width:88%;
+	height:60px;
+	background-image:red;
+	display:flex;
+	flex-direction:row;
+	align-items: center;
+	justify-content:left;
+}
+.postMainDiv{
+	width:88%;
+	background-color:white;
+	margin-bottom:20px;
+	font-family:Arial;
+	padding:20px;
+	padding-top:0px;
+	padding-bottom:0px;
+}
+
+.userDetails headerName
+{
+    font-size: 0px;
+    font-weight: 200;
+    font-family:Arial;
+}
+
+.postTitle
+{
+    font-size:15px;
+    font-family:Arial;
+}
+
+.postContent
+{
+    padding:15px;
+    display: flex;
+    flex-direction: column;
+    margin:inherit;
+}
+
+img
+{
+    height: 75px;
+    width: 75px;
+    image-orientation: from-image;
+}
+
+.userName
+{
+    padding:5px;
+	font-family: Arial;
+	color:black;
+	text-decoration: none;
+}
+
+.postText
+{
+    padding:0px;
+	font-family: Arial;
+    font-size: 12px;
+	color:black;
+	text-decoration: none;
+}
+
+.postTitle
+{
+    padding:0px;
+	font-family: Arial;
+	color:black;
+	text-decoration: none;
+}
+
+#see_more
+{
+    font-family:Arial;
+    text-align: left;
+    color:blue;
+    cursor:pointer;
+}
+
+
+
+#see_more:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,49 @@
+#loadDiv{
+	background-color:#D1E3D1;
+	width:870px;
+}
+
+.listPage{
+    display: flex;
+	list-style-type:none;
+	padding:0;
+	padding-right:7;
+    flex-wrap: wrap;
+}
+
+#thumbnails
+{
+    margin: 9px;
+    height: 150px;
+    border: solid 2px #fff;
+    box-shadow: 0 0 3px 2px #ccc;
+    cursor:pointer;
+    border-radius: 10px;
+}
+
+#albumNumber
+{
+    text-align: center;
+    margin-top: 25px;
+    font-size: 30;
+    font-family: Arial;
+}
+
+.allAlbums
+{
+    font-family: Arial;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#see_more
+{
+    font-family:Arial;
+    text-align: left;
+    color:blue;
+    cursor:pointer;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="navBarcss.css">
+		<link rel="stylesheet" type="text/css" href="userListcss.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		
+		<script>
+			var dataSet;
+			var i = 1;
+			var root = 'https://jsonplaceholder.typicode.com';
+			var a={
+					url: root + '/users',
+					method: 'GET'
+				  };
+			$.ajax(a).then(function(data) {
+			  dataSet=data;
+			  var list="";
+			  //var j=1;
+			  var listScript;
+				for(i=0;i<data.length;i++)
+				{
+					list = list + '<li value='+i+'><div class="listItem"><div class="profPicPage"><img src="DP.jpg" height="60"></div><div><a class="attributes">NAME:'+ data[i].name +'</a></br><a class="attributes">ID:'+ data[i].id +'</a></br></div></div></br></li>'
+				}
+				$('.listPage').html(list);
+				
+				$(document).ready(function(){
+					$("ul li div").click(function(){
+						console.log($(this).parent().index());
+						selectUser($(this).parent().index()+1);
+					});
+				});
+				function selectUser(n){
+					$(document).ready(function(){
+						console.log(n);
+						window.location.href='profPage.html?index='+$(".listPage li:nth-child("+n+")").val();
+					});
+				};
+			});
+		</script>
+		<!--<script>
+			$(document).ready(function(){
+				var i = 1;
+				$(".listPage li:nth-child("+1+")").click(function selectUser(i){
+					console.log(i);
+					window.location.href='profPage.html?index='+$(".listPage li:nth-child("+i+")").val();
+				});
+			});
+		</script>-->
+	</head>
+	<body>
+		<div align="center" class="navbar">							<!--Navigation Bar start-->
+			<a class="post" align="center" href="recentPosts.html" >
+				All Post
+			</a>
+			
+			<a class="post" align="center" href="photoList.html">
+				All Photots
+			</a>
+			
+			<a id="user" class="post" align="center" href="userList.html" >
+				All Users 
+			</a>
+            <a id="album" class="post" align="center" href="AlbumAllList.html" >
+				All Albums
+			</a>
+		</div>													
+		<div style="width:100%;height:60px;"></div>					<!--Navigation Bar end-->
+		
+		<div class="main">											<!--Your code start-->
+			<div id="loadDiv">
+				<ul class="listPage">
+					
+				</ul>
+			</div>
+		</div>														<!--Your code end-->
+	</body>
+</html>

@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="navBarcss.css">
+        <link rel="stylesheet" type="text/css" href="post.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		
+		<script>
+			var posts="";
+			var count=0;
+			var root = 'https://jsonplaceholder.typicode.com';
+			var a={
+                    url: root + '/posts',
+					method: 'GET'
+				  };
+			var b={
+                    url: root + '/users',
+					method: 'GET'
+				  };
+           
+			$.ajax(a).then(function post(data) {
+				$.ajax(b).then(function (data2) {
+					console.log(data2);
+                    count = data.length;
+					var i;
+					for(i=count-1;i>count-11;i--)
+					{
+						linkTo = 'profPage.html?index='+parseInt(data[i].userId-1);
+						posts = posts + '<li><div class="postDiv"><div class = "userDetails"><img src = "DP.jpg"><a href="'+linkTo+'" class = "userName">'+ data2[parseInt(data[i].userId-1)].username +'</a></div><div align="left "class="postDetDiv"><div class="postTitDiv"><h3>'+ data[i].title +'</h3></div><div class="postMainDiv"><p>'+data[i].body+'</p></div></div></div></li>';
+					}
+					$('.posts').html(posts);
+					count = i;
+					posts="";
+					
+					$('#see_more').click(function(){
+						var i;
+						if(count <= data.length)
+						{
+                            for(i=count;i>count-10;i--)
+                           {
+                            linkTo = 'profPage.html?index='+parseInt(data[i].userId-1);
+                            posts = posts + '<li><div class="postDiv"><div class = "userDetails"><img src = "DP.jpg"><a href="'+linkTo+'" class = "userName">'+ data2[parseInt(data[i].userId-1)].username +'</a></div><div align="left "class="postDetDiv"><div class="postTitDiv"><h3>'+ data[i].title +'</h3></div><div class="postMainDiv"><p>'+data[i].body+'</p></div></div></div></li>';
+                           }
+							$('.posts').append(posts);
+							count = i;
+							posts="";
+						}
+					});
+				});
+			});
+           
+		</script>
+	</head>
+	<body>
+		<div align="center" class="navbar">
+			<a class="post" align="center" href="recentPosts.html" >
+				All Post
+			</a>
+			
+			<a class="post" align="center" href="photoList.html">
+				All Photots
+			</a>
+			
+			<a id="user" class="post" align="center" href="userList.html" >
+				All Users 
+			</a>
+            <a id="album" class="post" align="center" href="AlbumAllList.html" >
+				All Albums
+			</a>
+		</div>
+		<div style="width:100%;height:60px;"></div>
+		
+		<div class="main">
+			<div align = "center" class="loadDiv">											<!--Your code start-->
+				<ul class = "posts">
+					
+				</ul>
+				<a id = "see_more">See more...</a>
+			</div>
+		</div>						
+	</body>
+</html>

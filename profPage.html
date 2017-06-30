@@ -1,0 +1,245 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="navBarcss.css">
+		<link rel="stylesheet" type="text/css" href="profPagecss.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRwsZalvcPSU_c_iUZLqIGCzNht9bfPn0&callback=myMap" async defer></script>
+		
+		<script>
+		var index;
+		var getUrlParameter = function getUrlParameter(sParam) 
+        {
+			var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+				sURLVariables = sPageURL.split('&'),sParameterName,i;
+
+			for (i = 0; i < sURLVariables.length; i++) 
+            {
+				sParameterName = sURLVariables[i].split('=');
+
+				if (sParameterName[0] === sParam) 
+                {
+					return sParameterName[1] === undefined ? true : sParameterName[1];
+				}
+			}
+		};//code by Sammer Kazi. stackoverflow.com
+            
+		function myMap(i) 
+        {
+            var mapOptions = 
+            {
+                center: new google.maps.LatLng(parseInt(i.address.geo.lat), parseInt(i.address.geo.lng)),
+                zoom: 10,
+                mapTypeId: google.maps.MapTypeId.HYBRID
+            }
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            var marker = new google.maps.Marker
+            ({
+                position: new google.maps.LatLng(parseInt(i.address.geo.lat), parseInt(i.address.geo.lng)),
+                map: map,
+            })
+		}
+            
+		$(document).ready(function()
+        {
+			index = getUrlParameter('index');
+			index = parseInt(index)+1;
+			var count = 8;
+			var i;
+			var root = 'https://jsonplaceholder.typicode.com';
+
+			$.ajax({
+				url: root + '/users/'+index,
+				method: 'GET'
+            }).then(function(data) 
+            {
+			  console.log(data);
+			  $('#userId').html(data.id);
+			  $('#userName').html(data.name);
+			  $('#userUsername').html(data.username);
+			  $('#userEmail').html(data.email);
+			  $('#userStreet').html(data.address.street);
+			  $('#userSuite').html(data.address.suite);
+			  $('#userCity').html(data.address.city);
+			  $('#userZipcode').html(data.address.zipcode);
+			  $('#userPhone').html(data.phone);
+			  $('#userWebsite').html(data.website);
+			  $('#userCompayName').html(data.company.name);
+			  $('#userCatchPhrase').html(data.company.catchPhrase);
+			  $('#userCompanyBS').html(data.company.bs);
+			  myMap(data);
+			  $.ajax({
+				  url: root + '/posts?userId='+data.id,
+				  method: 'GET'
+				}).then(function(data2) 
+                    {
+                        var a= '<li><div align="left "class="postDetDiv"><div class="postTitDiv"><h3 style="margin:0;">'+data2[data2.length-1].title+'</h3></div><div class="postMainDiv"><p style="margin-top:0;padding:10px;">'+data2[data2.length-1].body+'</p></div></div></li>';
+                        $('.listPage').html(a);
+
+                        $('#see_more').click(function()
+                        {
+                            posts = '<li><div align="left "class="postDetDiv"><div class="postTitDiv"><h3 style="margin:0;">'+data2[count].title+'</h3></div><div class="postMainDiv"><p style="margin-top:0;padding:10px;">'+data2[count].body+'</p></div></div></li>';
+                            $('.listPage').append(posts);
+                            count = count - 1;
+                            posts="";
+                        });
+                    });	
+				
+                var x=
+                {
+				url: root + '/albums?userId='+data.id,
+				method: 'GET'
+				};
+                
+                var y={
+                url: root + '/photos',
+				method: 'GET'
+                };
+                
+				$.ajax(x).then(function(data3) 
+                {
+                    $.ajax(y).then(function(data4)
+                    {
+                        var b= "";
+                        for(i=0;i<data3.length;i++)
+                        {
+                            for(j=0;j<data4.length;j++)
+                            {
+                                if(data3[i].id == data4[j].albumId)
+                                {
+                                    var x =  j+Math.floor((Math.random() * 49) + 0);
+                                    b = b + '<a href="albumList.html?AlbumId='+data4[j].albumId+'"><img style="margin:10px;"src="'+data4[x].thumbnailUrl+'" height="150px"></img></a>';
+                                    console.log(x);
+                                    j = data4.length;
+                                }
+                            }
+                        }
+                        $('.photoTNDiv').html(b);
+                    });
+                });
+            });	
+        });
+		</script>
+	</head>
+	<body>
+		<div align="center" class="navbar">
+			<a class="post" align="center" href="recentPosts.html" >
+				All Post
+			</a>
+			
+			<a class="post" align="center" href="photoList.html">
+				All Photots
+			</a>
+			
+			<a id="user" class="post" align="center" href="userList.html" >
+				All Users 
+			</a>
+            <a id="album" class="post" align="center" href="AlbumAllList.html" >
+				All Albums
+			</a>
+		</div>
+		<div style="width:100%;height:60px;"></div>
+		
+		<div class="main">
+			<div class="loadDiv">
+				<div class="userInfoDiv">
+					<div class="profPicDiv">
+						<img src="DP2.jpg" height="200px"></img>
+					</div>
+					
+					<div class="profInfoDiv">
+						<table class="infoTable">
+						  <tr>
+							<td>ID:</td>
+							<td id="userId"></td>
+						  </tr>
+						  <tr>
+							<td>NAME:</td>
+							<td id="userName"></td>
+						  </tr>
+						  <tr>
+							<td>USERNAME:</td>
+							<td id="userUsername"></td>
+						  </tr>
+						  <tr>
+							<td>E-MAIL:</td>
+							<td id="userEmail"></td>
+						  </tr>
+						  <tr>
+							<th>ADDRESS:</th>
+							<th> </th>
+						  </tr>
+						  <tr>
+							<td>STREET:</td>
+							<td id="userStreet"></td>
+						  </tr>
+						  <tr>
+							<td>SUITE:</td>
+							<td id="userSuite"></td>
+						  </tr>
+						  <tr>
+							<td>CITY:</td>
+							<td id="userCity"></td>
+						  </tr>
+						  <tr>
+							<td>ZIPCODE:</td>
+							<td id="userZipcode"></td>
+						  </tr>
+						  <tr>
+							<td>PHONE:</td>
+							<td id="userPhone"></td>
+						  </tr>
+						  <tr>
+							<td>WEBSITE:</td>
+							<td id="userWebsite"></td>
+						  </tr>
+						  <tr>
+							<th>COMPANY:</th>
+							<th> </th>
+						  </tr>
+						  <tr>
+							<td>NAME:</td>
+							<td id="userCompayName"></td>
+						  </tr>
+						  <tr>
+							<td>CATCH PHRASE:</td>
+							<td id="userCatchPhrase"></td>
+						  </tr>
+						  <tr>
+							<td>BS:</td>
+							<td id="userCompanyBS"></td>
+						  </tr>
+						</table>
+					</div>
+				</div>
+				<div style="height:600px;width:28%;margin-right:2%;margin-top:2%;"></div>
+				<div class="mppDiv">
+					<div class="mapDiv" id="map">
+					</div>
+					
+					<div class="photoDiv">
+						<div class="signDiv">
+							<a href="" class="signHREF">User's Albums</a>
+						</div>
+						<div class="photoTNDiv">
+							
+						</div>
+					</div>
+					
+					<div class="postDiv">
+						<div class="signDiv">
+							<a href="" class="signHREF">User's Posts</a>
+						</div>
+						<div class="postContentDiv">
+							<ul class="listPage">
+							</ul>
+							<div id = "see_more">See more...</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+	
+	</script>
+</html>

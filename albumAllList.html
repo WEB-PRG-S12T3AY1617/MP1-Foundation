@@ -1,0 +1,87 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="navBarcss.css">
+		<link rel="stylesheet" type="text/css" href="photoListcss.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+                var photoSet;
+                var photoIndex;
+                var index = 0;
+                var root = 'https://jsonplaceholder.typicode.com';
+                var a=
+                {
+                    url: root + '/photos',
+                    method: 'GET'
+                };
+                var x = 
+                {
+                    url: root + '/albums',
+                    method: 'GET'
+                };
+                $.ajax(a).then(function(photo)
+                {
+                    $.ajax(x).then(function(album)
+                    {
+                        photoSet = photo;
+                        var albumlist="";
+                        for(i=0;i<photo.length;i++)
+                        {
+                            if(album[index].id == photo[i].albumId)
+                            {
+                                albumlist = albumlist + '<li value='+album[index].id+'><div class ="allAlbums"><img src="' + photo[i].thumbnailUrl +'" id="thumbnails">50 Photos<br> Album # '+album[index].id+'</div></li>';
+                                index = index + 1;
+                                if(index == 100)
+                                {
+                                    i = photo.length;    
+                                }
+                            }
+                        }
+                        $(".listPage").html(albumlist);
+
+                        $(document).ready(function()
+                        {
+                           $("ul li div").click(function()
+                           {
+                               selectPhoto($(this).parent().index()+1);
+                           });
+                        });
+
+                        function selectPhoto(n)
+                        {
+                            $(document).ready(function()
+                            {
+                                  window.location.href='albumList.html?AlbumId='+$(".listPage li:nth-child("+n+")").val();
+                            });
+                        };
+                    });
+                });
+        </script>
+	</head>
+	<body>
+		<div align="center" class="navbar">							<!--Navigation Bar start-->
+			<a class="post" align="center" href="recentPosts.html" >
+				All Post
+			</a>
+			
+			<a class="post" align="center" href="photoList.html">
+				All Photots
+			</a>
+			
+			<a id="user" class="post" align="center" href="userList.html" >
+				All Users 
+			</a>
+            <a id="album" class="post" align="center" href="AlbumAllList.html" >
+				All Albums
+			</a>
+		</div>													
+		<div style="width:100%;height:60px;"></div>					<!--Navigation Bar end-->
+		
+		<div class="main">											<!--Your code start-->
+            <div id="loadDiv">
+				<ul class="listPage">
+					
+				</ul>
+            </div>
+        </div>														<!--Your code end-->
+	</body>
+</html>
